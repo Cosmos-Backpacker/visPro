@@ -1,16 +1,20 @@
 package com.cosmos.system.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.cosmos.common.domain.R;
 import com.cosmos.common.entity.User;
 import com.cosmos.common.exception.BusinessException;
+import com.cosmos.common.model.LoginUser;
+import com.cosmos.common.service.TokenService;
+import com.cosmos.common.utils.SecurityUtils;
 import com.cosmos.system.service.impl.UserServiceImpl;
+import com.cosmos.system.utils.MailUtil;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @Slf4j
@@ -20,6 +24,13 @@ public class UserController {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private TokenService tokenService;
+
+
+    @Autowired
+    private MailUtil mailUtil;
 
 
     /**
@@ -64,6 +75,75 @@ public class UserController {
         }
         // 调用服务层根据账号获取用户信息
         return R.success("获取用户信息成功", userService.registerUser(account, password, confirmPassword));
+    }
+
+
+    /**
+     * 获取用户信息
+     *
+     * @return 用户信息
+     */
+    @GetMapping("/getInfo")
+    public R<?> getInfo() {
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        if (loginUser == null) {
+            throw new BusinessException("用户不存在");
+        }
+
+        return R.success("获取用户信息成功", loginUser);
+    }
+
+
+    /**
+     * 更新用户信息
+     *
+     * @return 用户信息
+     */
+    @PostMapping("/updateUserInfo")
+    public R<?> updateUserInfo(@RequestBody User user, HttpServletRequest request) {
+
+        if (user.getId() == null) {
+            throw new BusinessException("用户ID不能为空");
+        }
+        // 调用服务层根据账号获取用户信息
+
+        LoginUser loginUser = new LoginUser();
+
+        boolean isSuccess = userService.updateUserInfo(user);
+        if (!isSuccess) {
+            throw new BusinessException("更新用户信息失败");
+        } else {
+            //获取最新的数据
+            User newUser = userService.getById(user.getId());
+            //更新redis数据库
+            loginUser = BeanUtil.copyProperties(newUser, LoginUser.class);
+
+
+            String token = SecurityUtils.getToken(request);
+
+            loginUser.setToken(SecurityUtils.getUserKey(token));
+            //获取原来的userKey
+
+
+            // 更新redis数据库
+            tokenService.refreshToken(loginUser);
+        }
+
+
+        // 调用服务层根据账号获取用户信息
+        return R.success("获取用户信息成功", loginUser);
+    }
+
+
+    @PostMapping("/feedBack")
+    public R<?> feedBack(String content) throws MessagingException {
+
+        long userId = SecurityUtils.getLoginUser().getId();
+
+        mailUtil.sendTextMailMessage("3317194303@qq.com", "来自用户" + userId + "反馈信息", content);
+
+        return R.success("反馈成功");
+
     }
 
 

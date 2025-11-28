@@ -24,8 +24,9 @@
         <spring-cloud-alibaba.version>2023.0.1.2</spring-cloud-alibaba.version>
         <mybatis-spring.version>3.0.3</mybatis-spring.version>
         <mybatis-plus.version>3.5.9</mybatis-plus.version>
-        <jjwt.version>0.9.1</jjwt.version>
         <fastjson.version>2.0.57</fastjson.version>
+        <transmittable-thread-local.version>2.14.4</transmittable-thread-local.version>
+        <jjwt.version>0.11.5</jjwt.version>
     </properties>
 
     <packaging>pom</packaging>
@@ -63,12 +64,6 @@
                 <version>${mybatis-plus.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
-                <version>${jjwt.version}</version>
-            </dependency>
-
 
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>
@@ -82,6 +77,25 @@
                 <artifactId>visPro-common</artifactId>
                 <version>${visPro-common.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+
+
 
         </dependencies>
     </dependencyManagement>
@@ -119,7 +133,11 @@
         </dependency>
 
 
-
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>${transmittable-thread-local.version}</version>
+        </dependency>
 
 
     </dependencies>
@@ -170,7 +188,40 @@
                 <enabled>true</enabled>
             </releases>
         </repository>
+
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+
+        <repository>
+            <id>central</id>
+            <url>https://maven.aliyun.com/repository/central</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+
     </repositories>
+
 
     <pluginRepositories>
         <pluginRepository>

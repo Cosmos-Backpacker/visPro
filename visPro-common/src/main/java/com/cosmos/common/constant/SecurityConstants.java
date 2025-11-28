@@ -12,10 +12,14 @@ public class SecurityConstants
      */
     public static final String DETAILS_USER_ID = "user_id";
 
+
     /**
      * 用户名字段
      */
     public static final String DETAILS_USERNAME = "username";
+
+
+    public static final String DETAILS_ACCOUNT = "account";
 
     /**
      * 授权信息字段

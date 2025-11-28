@@ -37,7 +37,7 @@ public class JwtTokenUtil {
 
 
     //验证token如果正确返回用户id
-    public static R checkToken(String token) {
+    public static R<String> checkToken(String token) {
         try {
             // 解析token  
             Claims claims = Jwts.parser()

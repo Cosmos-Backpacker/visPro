@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cosmos.common.entity.User;
 import com.cosmos.common.exception.BusinessException;
+import com.cosmos.common.model.LoginUser;
+import com.cosmos.common.utils.StringUtils;
 import com.cosmos.system.mapper.UserMapper;
 import com.cosmos.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +46,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public boolean registerUser(String account, String password, String confirmPassword) {
         User user = new User();
         user.setUserAccount(account);
-
         // 密码加密
         String encryptPassword = DigestUtils.md5DigestAsHex((SALT + password).getBytes());
         user.setUserPassword(encryptPassword);
 
         return baseMapper.insert(user) > 0;
 
+    }
+
+    @Override
+    public boolean updateUserInfo(User user) {
+        User dbUser = baseMapper.selectById(user.getId());
+        if (dbUser == null) {
+            throw new BusinessException("用户不存在");
+        }
+        dbUser.setUsername(user.getUsername());
+
+        dbUser.setAvatarUrl(user.getAvatarUrl());
+        if (StringUtils.isNotEmpty(user.getUserPassword())) {
+            dbUser.setUserPassword(DigestUtils.md5DigestAsHex((SALT + user.getUserPassword()).getBytes()));
+        }
+        dbUser.setPhone(user.getPhone());
+        dbUser.setEmail(user.getEmail());
+        dbUser.setGender(user.getGender());
+
+        return baseMapper.updateById(dbUser) > 0;
     }
 
 

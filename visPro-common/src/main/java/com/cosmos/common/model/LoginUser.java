@@ -53,4 +53,20 @@ public class LoginUser implements Serializable {
      * 用户角色 0-普通用户，1-管理员
      */
     private Integer role;
+
+    private String token;
+
+
+    /**
+     * 过期时间
+     */
+    private Long expireTime;
+
+
+    /**
+     * 登录时间
+     */
+    private Long loginTime;
+
+
 }

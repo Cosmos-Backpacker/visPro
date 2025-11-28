@@ -20,7 +20,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @AutoConfigureBefore(RedisAutoConfiguration.class)
 @SuppressWarnings("deprecation")
 public class RedisConfig extends CachingConfigurerSupport {
-    @Bean
+    @Bean("redisTemplate")
     @SuppressWarnings(value = {"unchecked", "rawtypes"})
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
