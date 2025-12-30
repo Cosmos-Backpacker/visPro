@@ -99,8 +99,6 @@
         </dependency>
 
 
-
-
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-mcp-client-spring-boot-starter</artifactId>
@@ -138,8 +136,6 @@
         </dependency>
 
 
-
-
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-openai-spring-boot-starter</artifactId>
@@ -167,6 +163,14 @@
                     <artifactId>bcprov-jdk15on</artifactId>
                     <groupId>org.bouncycastle</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>protobuf-java</artifactId>
+                    <groupId>com.google.protobuf</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>protobuf-java-util</artifactId>
+                    <groupId>com.google.protobuf</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -177,7 +181,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.cosmos.system.SystemApplication</mainClass>
                     <excludes>
@@ -187,14 +190,14 @@
                         </exclude>
                     </excludes>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>repackage</id>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>repackage</id>-->
+<!--                        <goals>-->
+<!--                            <goal>repackage</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
             </plugin>
         </plugins>
     </build>

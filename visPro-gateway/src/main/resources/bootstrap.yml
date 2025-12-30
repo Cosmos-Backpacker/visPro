@@ -1,23 +1,5 @@
 spring:
   application:
     name: visPro-gateway
-  cloud:
-    nacos:
-      config:
-        server-addr: 192.168.112.1:8848
-        file-extension: yml
-        group: DEFAULT_GROUP
-        namespace: ec64767f-be0d-4f9f-999d-c1e981cf0c4a
-        shared-configs:
-          - data-id: application.yml
-            group: DEFAULT_GROUP
-            refresh: true
-        import-check:
-          enabled: false
-      discovery:
-        server-addr: 192.168.112.1:8848
-        namespace: ec64767f-be0d-4f9f-999d-c1e981cf0c4a
-        group: DEFAULT_GROUP
-  config:
-    import:
-      - optional:nacos:${spring.application.name}.yml
+  profiles:
+    active: dev

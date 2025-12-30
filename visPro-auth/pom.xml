@@ -39,10 +39,6 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-
-        <!--引入jwt相关包来生成token-->
-
-
         <!--补充缺失的依赖-->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
@@ -74,5 +70,18 @@
 
     </dependencies>
 
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.cosmos.auth.AuthApplication</mainClass>
+                </configuration>
+                <!--这里不需要配置repackage，因为总pom文件已经配置了repackage-->
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

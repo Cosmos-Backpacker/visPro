@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cosmos.common.entity.User;
 import com.cosmos.common.exception.BusinessException;
-import com.cosmos.common.model.LoginUser;
 import com.cosmos.common.utils.StringUtils;
 import com.cosmos.system.mapper.UserMapper;
 import com.cosmos.system.service.IUserService;

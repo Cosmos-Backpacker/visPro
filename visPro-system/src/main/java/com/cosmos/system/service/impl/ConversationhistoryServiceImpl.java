@@ -1,9 +1,9 @@
 package com.cosmos.system.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cosmos.system.entity.Conversationhistory;
 import com.cosmos.system.mapper.ConversationhistoryMapper;
 import com.cosmos.system.service.IConversationhistoryService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

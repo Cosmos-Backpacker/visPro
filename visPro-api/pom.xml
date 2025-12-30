@@ -9,6 +9,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <description>
+        visPro-api系统接口
+    </description>
+
     <artifactId>visPro-api</artifactId>
 
 
@@ -20,13 +24,6 @@
             <artifactId>visPro-common</artifactId>
         </dependency>
     </dependencies>
-
-
-
-    <description>
-        visPro-api系统接口
-    </description>
-
 
 
 </project>

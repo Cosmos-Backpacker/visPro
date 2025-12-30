@@ -20,7 +20,7 @@ public class HttpUtil {
     }
 
     public static String post(String requestUrl, String accessToken, String contentType, String params)
-            throws Exception {
+            throws Exception {  
         String encoding = "UTF-8";
         if (requestUrl.contains("nlp")) {
             encoding = "GBK";
