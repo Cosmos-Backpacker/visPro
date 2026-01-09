@@ -1,0 +1,82 @@
+server:
+    port: 9005
+
+
+spring:
+  application:
+    name: visPro-system
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1111
+    url: jdbc:mysql://localhost:3306/vispro?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai&useSSL=false 
+  mail:
+    #配置smtp服务主机地址
+    # qq邮箱为smtp.qq.com          端口号465或587
+    # sina    smtp.sina.cn
+    # aliyun  smtp.aliyun.com
+    # 163     smtp.163.com       端口号465或994
+
+    host: smtp.qq.com
+    #发送者邮箱
+    username: #
+    #配置密码,注意不是真正的密码，而是刚刚申请到的授权码
+    password: #
+    #端口号465或587
+    port: 465
+    #默认的邮件编码为UTF-8
+    default-encoding: UTF-8
+    #其他参数
+    properties:
+      mail:
+        #配置SSL 加密工厂
+        smtp:
+          ssl:
+            #本地测试，先放开ssl
+            enable: true
+            #开启debug模式，这样邮件发送过程的日志会在控制台打印出来，方便排查错误
+            required: true
+        debug: true
+
+  # application.yml
+  ai:
+    openai:
+      base-url: https://api.deepseek.com
+      api-key: #apikey
+      chat:
+        options:
+          model: deepseek-chat
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  # MyBatis-Plus 配置项
+  configuration:
+    # 是否开启驼峰命名自动映射，即从经典数据库列名 A_COLUMN 映射到经典 Java 属性名 aColumn
+    map-underscore-to-camel-case: false    # 不开启驼峰命名自动映射
+  # Mapper XML 文件的位置
+  mapper-locations: classpath*:mapper/*.xml
+  # 实体类的包路径，用于指定实体类的别名
+  type-aliases-package: com.cosmos.common.entity   # 实体类所在的包路径，指定后可以使用实体类名作为别名
+  # 全局配置
+  global-config:
+    # 数据库配置
+    db-config:
+      # 逻辑删除字段名
+      logic-delete-field: deleted # 逻辑删除字段名
+      # 逻辑已删除值（默认值：1）
+      logic-delete-value: 1 # 逻辑删除的值
+      # 逻辑未删除值（默认值：0）
+      logic-not-delete-value: 0 # 逻辑未删除的值
+
+bd:
+  config:
+    ocr-app-id: #
+    ocr-api-key: #
+    ocr-secret-key: #
+    enhance-app-id: #
+    enhance-api-key: #
+    enhance-secret-key: #
+    understand-api-key: #
+    understand-secret-key: #
+    client-id: #
+    client-secret: #
